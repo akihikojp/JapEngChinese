@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/JapEngChi?autoReconnect=true&useSSL=false
+    username: root
+    password: nasaroi7361
+server:
+  context-path: /translate
+  
+security.basic.enabled: false
