@@ -23,4 +23,4 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 ・そこらへん調べるとコントローラでどういう設定すればいいかもわかると思う
 
 ・Content.Typeを拡張子で判断してくれるならファイル名を一緒にヘッダ情報に入れ込むので問題ないが、
-判断してくれない場合はサーバ側でContent.Typeをがっつり条件分岐か何かで指定してあげないといけな
+判断してくれない場合はサーバ側でContent.Typeをがっつり条件分岐か何かで指定してあげないといけない
