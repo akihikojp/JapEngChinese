@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.impl.io.IdentityInputStream;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,43 +84,43 @@ public class DownloadController {
         System.out.println("str : " + str); // str : apple
     }
     
-	/**1-1 http://blog.okazuki.jp/entry/2015/07/18/220959 */
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> download() throws IOException {
-	    HttpHeaders h = new HttpHeaders(); //レスポンスヘッダーのみを返却
-	    h.add("Content-Type", "text/csv; charset=MS932"); //ここでレスポンスボディの内容を作ってaddしてる？
-	    h.setContentDispositionFormData("filename", "hoge.csv");
-	    return new ResponseEntity<>("あ,い,う,え,お".getBytes("MS932")/**バイト型に変換*/, h, HttpStatus.OK);
-	}
+//	/**1-1 http://blog.okazuki.jp/entry/2015/07/18/220959 */
+//	@RequestMapping(value = "/download", method = RequestMethod.GET)
+//	public ResponseEntity<byte[]> download() throws IOException {
+//	    HttpHeaders h = new HttpHeaders(); //レスポンスヘッダーのみを返却
+//	    h.add("Content-Type", "text/csv; charset=MS932"); //ここでレスポンスボディの内容を作ってaddしてる？
+//	    h.setContentDispositionFormData("filename", "hoge.csv");
+//	    return new ResponseEntity<>("あ,い,う,え,お".getBytes("MS932")/**バイト型に変換*/, h, HttpStatus.OK);
+//	}
 	
 	/** 2-1 https://qiita.com/kazuki43zoo/items/36b4dc0f13f1434e490c*/
-//	@Autowired
-//	DownloadSupport downloadSupport;
-//
-//	@RequestMapping(path = "/mocks/{id}/file", method = RequestMethod.GET)
-//	public ResponseEntity<Resource> download(@PathVariable int id) throws UnsupportedEncodingException {
-//	    MockResponse mockResponse = service.findOne(id); // ファイル名とダウンロードデータ(BLOBデータ)はDBから取得
-//	    HttpHeaders headers = new HttpHeaders();
-//	    downloadSupport.addContentDisposition(headers, mockResponse.getFileName()); // 2-2 サポートクラス参照！
-//	    return ResponseEntity
-//	            .status(HttpStatus.OK)
-//	            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-//	            .headers(headers)
-//	            .body(new InputStreamResource(mockResponse.getBody()));
-//	}
+	@Autowired
+	DownloadSupport downloadSupport;
+
+	@RequestMapping(path = "/mocks/{id}/file", method = RequestMethod.GET)
+	public ResponseEntity<Resource> download(@PathVariable int id) throws UnsupportedEncodingException {
+	    MockResponse mockResponse = service.findOne(id); // ファイル名とダウンロードデータ(BLOBデータ)はDBから取得
+	    HttpHeaders headers = new HttpHeaders();
+	    downloadSupport.addContentDisposition(headers, mockResponse.getFileName()); // 2-2 サポートクラス参照！
+	    return ResponseEntity
+	            .status(HttpStatus.OK)
+	            .contentType(MediaType.APPLICATION_OCTET_STREAM) /**ここでファイル形式指定*/
+	            .headers(headers)
+	            .body(new InputStreamResource(mockResponse.getBody()));
+	}
 	/**2-2*/
-//	@Component
-//	public class DownloadSupport {
-//
-//	    private static final String CONTENT_DISPOSITION_FORMAT = "attachment; filename=\"%s\"; filename*=UTF-8''%s";
-//
-//	    public void addContentDisposition(HttpHeaders headers, String fileName) throws UnsupportedEncodingException {
-//	        String headerValue = String.format(CONTENT_DISPOSITION_FORMAT,
-//	                fileName, UriUtils.encode(fileName, StandardCharsets.UTF_8.name()));
-//	        headers.add(HttpHeaders.CONTENT_DISPOSITION, headerValue);
-//	    }
-//
-//	}
+	@Component
+	public class DownloadSupport {
+
+	    private static final String CONTENT_DISPOSITION_FORMAT = "attachment; filename=\"%s\"; filename*=UTF-8''%s";
+
+	    public void addContentDisposition(HttpHeaders headers, String fileName) throws UnsupportedEncodingException {
+	        String headerValue = String.format(CONTENT_DISPOSITION_FORMAT,
+	                fileName, UriUtils.encode(fileName, StandardCharsets.UTF_8.name()));
+	        headers.add(HttpHeaders.CONTENT_DISPOSITION, headerValue);
+	    }
+
+	}
 	
 
 }

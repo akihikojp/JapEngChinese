@@ -1,0 +1,26 @@
+
+
+・2つ目の書き方がいい
+・メディアタイプというところでファイルのタイプを指定している
+・MediaTypeリファレンス
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/MediaType.html
+・All_VALUEとか
+・inputStreamでbyteにして、outputStreamでデシリアライズ？
+・inputStreamでbyteにしたファイルがdbにBLOB型で入っている。そいつをdbから取り出してきた時点ではbyte型なのでサーバ側でデシリアライズしてあげる必要がある。（デシリアライズをdomaが勝手にやってくれるのかは不明
+
+
+・デシリアライズ   byte → Java
+-inputStreamを使ってJavaオブジェクトにしているのでinputStreamが、デシリアライズ
+・シリアライズ    Java → byte
+-outputStreamでシリアライズ(byte変換)する事で通信に乗せてデータのやり取りをすることができるのでoutputStreamがシリアライズ
+
+
+・Httpレスポンスに乗せてファイルをブラウザに送りたいわけだから、dbから取り出した時点で別にデシリアライズしなくても、そのままresponseHeaderに埋め込んでレスポンスしたらダメなのか
+・ブラウザはbyteで受け取るはずだからブラウザ側ではファイル名についている拡張子見て勝手にファイルにしてくれてるのでは?
+
+・どこでファイルに変換してるのかって言ったら、ヘッダ情報にどういう風にデシリアライズすればいいかが書いてあるとしか思えない
+・それがMediaTypeの仕事なのかコンテントタイプの仕事なのか、拡張子の仕事なのか
+・そこらへん調べるとコントローラでどういう設定すればいいかもわかると思う
+
+・Content.Typeを拡張子で判断してくれるならファイル名を一緒にヘッダ情報に入れ込むので問題ないが、
+判断してくれない場合はサーバ側でContent.Typeをがっつり条件分岐か何かで指定してあげないといけな
