@@ -1,6 +1,5 @@
 DBからの情報を取得する。
 -jQueryバージョン
--Vue.jsバージョン
 ※テンプレはThymeleaf
 
 ```
@@ -18,8 +17,25 @@ CREATE TABLE `languages` (
 Insert into languages (id,language,text) VALUES(1,'English','AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 Insert into languages (id,language,text) VALUES(2,'Japanese','ああああああああああああああああああああああああああああああああさああああああああああああああああああ');
 Insert into languages (id,language,text) VALUES(3,'Chinese','亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜亜');
-```
 
+Drop table users;
+
+CREATE TABLE `JapEngChi`.`users` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `default_language` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+Insert into users (id,name,default_language) VALUES(1,'Mr.Google','English');
+Insert into users (id,name,default_language) VALUES(2,'山田山尾','Japanese');
+Insert into users (id,name,default_language) VALUES(3,'習近平','Chinese');
+Insert into users (id,name,default_language) VALUES(4,'Mr.Amazon','English');
+Insert into users (id,name,default_language) VALUES(5,'村井村尾','Japanese');
+Insert into users (id,name,default_language) VALUES(6,'鄧小平','Chinese');
+
+
+```
 
 
 
@@ -35,8 +51,7 @@ jQueryで書いてみた
             url: contextPath + 'getlanguage',
             dataType: "json",
             type: "get"
-            
-            //デフォルト通信を書いとく
+
         })
         .done(function(searchLanguages){
         	for(lang of searchLanguages)
@@ -75,9 +90,4 @@ jQueryで書いてみた
           }
     });
 });
-```
-
-
-```
-Vue.jsで書いてみた
 ```

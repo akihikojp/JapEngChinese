@@ -7,15 +7,20 @@
 <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" th:src="@{js/index.js}"></script>
-<script th:src="@{/js/vueindex.js}"></script>
-
 <title>取得テスト</title>
 </head>
 <body>
 <input id="contextPath" type="hidden" th:value="@{/}" />
 
+<div class="login-user">
+<p>ようこそ!</p>
+・ID番号:<p th:text="${userInfo.id}" th:value="${userInfo.id}"/>
+・名前:<p th:text="${userInfo.name}" th:value="${userInfo.name}"/>
+・言語：<p id="default_language" th:text="${userInfo.defaultLanguage}" th:value="${userInfo.defaultLanguage}"/>
+</div>
+
 			<div>
-          	  <label><input class="select-language" type="radio" name="selectedRadio" th:value="Japanese" th:text="日本語" checked="checked"/></label>
+          	  <label><input class="select-language" type="radio" name="selectedRadio" th:value="Japanese" th:text="日本語"/></label>
    			  <label><input class="select-language" type="radio" name="selectedRadio" th:value="English"  th:text="英語"/></label>
    			  <label><input class="select-language" type="radio" name="selectedRadio" th:value="Chinese"  th:text="中国語"/></label>
 			</div>

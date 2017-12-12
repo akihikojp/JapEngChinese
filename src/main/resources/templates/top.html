@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" th:src="@{js/index.js}"></script>
+
+<title>トップページ</title>
+</head>
+<body>
+<input id="contextPath" type="hidden" th:value="@{/}" />
+ようこそ!
+番号を選んでください。
+
+<form th:action="@{/index}" method="post">
+<select name="id">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+<input type="submit" value="送信"/>
+</form>
+
+</body>
+</html>

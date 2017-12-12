@@ -18,12 +18,37 @@
                     languageMap.set('Chinese', lang);
             }
         	
-        		//デフォルトで表示される。	
-            let japan = languageMap.get('Japanese');
-            $('#inputTextarea').text(japan.text);
-
         	
-        })
+   
+        	/**ここから!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        	
+        	
+            var defaultLanguage = $('#default_language')["0"].firstChild.data;
+            let country = languageMap.get(defaultLanguage);
+            $('#inputTextarea').text(country.text);
+
+            $('#sampleSelect option').filter(function(index){
+            	return $(this).text() === 'Strawberry'; // Strawberryを選択する場合
+            }).prop('selected', true);
+            
+            $('.select-language').filther(function(index){
+            	return $(this).text() === country.language;
+            }).attr("checked", true);
+            
+            
+//            if(country.language == this.$('.select-language').val()){
+//            	this.$('.select-language').attr("checked", true);
+//            }
+          
+            
+            var color1 = document.getElementsByName("color1");
+        	for (var i = 0; i < color1.length; i++){
+        		if(color1[i].checked) //(color1[i].checked === true)と同じ
+        			str = color1[i].value;
+        	}
+        	
+        	
+        	})
         ,function(){};
 
         
