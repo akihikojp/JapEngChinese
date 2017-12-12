@@ -58,7 +58,7 @@ public class DownloadController {
 //	・シリアライズ（直列化） → Javaのインスタンスをバイト列として出力すること。
 //	・デシリアライズ → バイト列をJavaのインスタンスに復元すること。
 //  
-//	<上がシリアライズ、下がでデシリアライズ>
+//  <上がシリアライズの動き、下がデシリアライズの動き>
 //  JavaのObject => <ObjectOutputStream> ----<FileOutputStream>--->  <ファイル(バイト列)>
 //  JavaのObject <= <ObjectInputStream>  <---<FileInputStream> ----  <ファイル(バイト列)>
 
@@ -68,10 +68,10 @@ public class DownloadController {
 //      一般的に、画像や音声などの大きなバイナリデータもそのままメモリに格納することが可能。
 //	  2.MultipartFile ・・・　このクラスでファイルを受け取れるみたい
 //	  3.String.getBytes()　・・・　文字列をByte型に変換してくれるメソッド
-//    4.new String ("※byteの文字")　Byte型をStringに変換するメソッド
-//    5.InputStream ・・・　ファイルからの読込み 参考：http://www.atmarkit.co.jp/ait/articles/0709/12/news124_2.html
+//        4.new String ("※byteの文字")　Byte型をStringに変換するメソッド
+//        5.InputStream ・・・　ファイルからの読込み 参考：http://www.atmarkit.co.jp/ait/articles/0709/12/news124_2.html
 	
-	/**BYTEとかBLOBとか : https://www.sejuku.net/blog/19650*/
+　　/**BYTEの変換とか : https://www.sejuku.net/blog/19650*/
     public void  ByteAndString() {
         //バイナリ文字列→String型変換
 	    	//byte→String
